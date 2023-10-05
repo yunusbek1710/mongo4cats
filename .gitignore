@@ -1,0 +1,6 @@
+# Project exclude paths
+target
+.idea
+.bsp
+.env
+local_env.sh
