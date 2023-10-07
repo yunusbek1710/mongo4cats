@@ -1,4 +1,4 @@
-package mongodb.database
+package mongodb.support.database
 
 import eu.timepit.refined.types.net.UserPortNumber
 import eu.timepit.refined.types.string.NonEmptyString

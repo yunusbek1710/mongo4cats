@@ -1,6 +1,8 @@
 package mongo.syntax
 
 import cats.implicits.toBifunctorOps
+import ciris.ConfigDecoder
+import ciris.ConfigError
 import io.circe.Decoder
 import io.circe.parser.decode
 

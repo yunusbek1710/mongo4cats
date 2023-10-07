@@ -1,4 +1,4 @@
-package bulavka.test.generators
+package mongo.test.generators
 
 import cats.effect.Sync
 import org.scalacheck.Gen

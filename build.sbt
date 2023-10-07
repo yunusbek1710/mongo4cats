@@ -1,18 +1,15 @@
 import Dependencies.Libraries
+import ProjectDefaults.autoImport.CompileAndTest
 
 ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "2.13.12"
 
-lazy val CompileAndTest = "compile->compile;test->test"
-
-lazy val `test-tools` = project
-  .in(file("test"))
+lazy val root = (project in file("."))
   .settings(
-    name := "test-tools",
-    libraryDependencies ++= Libraries.Testing.all,
+    name := "mongo4cats"
   )
-  .dependsOn(common)
+  .dependsOn(LocalProject("common"), LocalProject("test-tools") % CompileAndTest)
 
 lazy val common = project
   .in(file("common"))
@@ -35,10 +32,32 @@ lazy val common = project
         ),
   )
 
-lazy val root = (project in file("."))
+lazy val supports = project
+  .in(file("supports"))
   .settings(
-    name := "mongo4cats"
+    name := "supports"
   )
-  .dependsOn(LocalProject("common"), LocalProject("test-tools") % CompileAndTest)
 
-libraryDependencies ++= Libraries.MongoDB.all ++ Libraries.Cats.all ++ Libraries.Refined.all
+lazy val services = project
+  .in(file("services"))
+  .settings(
+    name := "services"
+  )
+
+lazy val `test-tools` = project
+  .in(file("test"))
+  .settings(
+    name := "test-tools",
+    libraryDependencies ++= Libraries.Testing.all,
+  )
+  .dependsOn(common)
+
+addCommandAlias(
+  "styleCheck",
+  "all scalafmtSbtCheck; scalafmtCheckAll; Test / compile; scalafixAll --check",
+)
+
+Global / lintUnusedKeysOnLoad := false
+Global / onChangedBuildSource := ReloadOnSourceChanges
+//
+//libraryDependencies ++= Libraries.MongoDB.all ++ Libraries.Cats.all ++ Libraries.Refined.all

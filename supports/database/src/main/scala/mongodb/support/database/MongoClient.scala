@@ -1,7 +1,8 @@
-package mongodb.database
+package mongodb.support.database
 
 import cats.effect.Async
 import cats.effect.Resource
+import mongo.syntax.refined._
 import mongo4cats.client.{ MongoClient => Client }
 import mongo4cats.models.client.MongoConnection
 import mongo4cats.models.client.MongoConnectionType

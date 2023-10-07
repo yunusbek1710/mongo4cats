@@ -1,4 +1,4 @@
-package bulavka.test
+package mongo.test
 
 import cats.effect.IO
 import org.typelevel.log4cats.SelfAwareStructuredLogger

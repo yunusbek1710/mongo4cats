@@ -2,6 +2,7 @@ package mongo.syntax
 
 import cats.implicits.catsSyntaxTuple2Semigroupal
 import eu.timepit.refined.types.numeric.NonNegInt
+import mongo.syntax.refined.commonSyntaxAutoUnwrapV
 
 trait ListSyntax {
   implicit def listSyntaxPaginationOps[A](list: List[A]): PaginationOps[A] =
