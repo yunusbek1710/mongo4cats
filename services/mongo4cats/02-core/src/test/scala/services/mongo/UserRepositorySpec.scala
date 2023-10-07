@@ -1,7 +1,8 @@
-package mongo.services
+package services.mongo
 
 import mongo4cats.operations.Filter
-import mongodb.domain.User
+import mongodb.support.database.DBSuite
+import services.mongo.domain.User
 
 object UserRepositorySpec extends DBSuite with UserGenerator {
   test("User create") { client =>

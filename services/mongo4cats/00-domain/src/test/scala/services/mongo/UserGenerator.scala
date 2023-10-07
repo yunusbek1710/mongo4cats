@@ -1,9 +1,8 @@
-package mongo.services
+package services.mongo
 
-import bulavka.test.generators.Generators
-import org.scalacheck.Gen
 import mongo.test.generators.Generators
-import mongodb.domain.User
+import org.scalacheck.Gen
+import services.mongo.domain.User
 
 trait UserGenerator extends Generators {
   def userGen: Gen[User] =

@@ -1,4 +1,4 @@
-package mongodb.domain
+package services.mongo.domain
 
 import io.circe.Codec
 import io.circe.generic.semiauto.deriveCodec

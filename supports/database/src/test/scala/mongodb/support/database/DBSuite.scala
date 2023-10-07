@@ -1,4 +1,4 @@
-package mongo.services
+package mongodb.support.database
 
 import cats.effect.{IO, Resource}
 import mongo4cats.client.MongoClient
