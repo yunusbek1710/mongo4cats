@@ -6,33 +6,18 @@ object Dependencies {
     lazy val `cats-effect` = "3.3.14"
     lazy val circe = "0.14.3"
     lazy val fs2 = "3.3.0"
-    lazy val http4s = "0.23.11"
     lazy val log4cats = "2.5.0"
-    lazy val skunk = "0.2.3"
     lazy val logback = "1.4.4"
     lazy val ciris = "2.3.2"
     lazy val refined = "0.10.1"
     lazy val tsec = "0.4.0"
-    lazy val redis4cats = "1.3.0"
     lazy val monocle = "3.1.0"
     lazy val `cats-retry` = "3.1.0"
     lazy val newtype = "0.4.4"
     lazy val derevo = "0.13.0"
-    lazy val sttp = "3.7.2"
-    lazy val media = "1.1.3"
-    lazy val scalaPhash = "1.2.2"
-    lazy val `cats-tagless` = "0.14.0"
     lazy val `mu-rpc` = "0.29.0"
-    lazy val `http4s-jwt-auth` = "1.0.0"
-    lazy val `meow-mtl` = "0.5.0"
-    lazy val mailer = "1.4.7"
-    lazy val izumi = "2.2.1"
     lazy val enumeratum = "1.7.2"
-    lazy val flyway = "9.6.0"
-    lazy val `organize-imports` = "0.6.0"
     lazy val `fs2-kafka` = "2.5.0"
-    lazy val `mongo-db` = "4.7.1"
-    lazy val `apache-common-codec` = "1.15"
     lazy val mongo4cats = "0.6.7"
     lazy val cron4s = "0.6.1"
     lazy val `fs2-cron4s` = "0.7.2"
@@ -41,7 +26,6 @@ object Dependencies {
 
     lazy val weaver = "0.8.0"
     lazy val `test-container` = "1.17.4"
-    lazy val postgresql = "42.5.0"
   }
 
   trait LibGroup {
@@ -59,16 +43,6 @@ object Dependencies {
       lazy val refined: ModuleID = circe("refined")
       lazy val `generic-extras`: ModuleID = circe("generic-extras")
       override def all: Seq[ModuleID] = Seq(core, generic, parser, refined, `generic-extras`)
-    }
-
-    object Skunk extends LibGroup {
-      private def skunk(artifact: String): ModuleID =
-        "org.tpolecat" %% artifact % Versions.skunk
-
-      lazy val core: ModuleID = skunk("skunk-core")
-      lazy val circe: ModuleID = skunk("skunk-circe")
-      lazy val refined: ModuleID = skunk("refined")
-      override def all: Seq[ModuleID] = Seq(core, circe, refined)
     }
 
     object Ciris extends LibGroup {
@@ -90,18 +64,6 @@ object Dependencies {
       override def all: Seq[ModuleID] = Seq(core, cats)
     }
 
-    object Http4s extends LibGroup {
-      private def http4s(artifact: String): ModuleID =
-        "org.http4s" %% s"http4s-$artifact" % Versions.http4s
-
-      lazy val dsl: ModuleID = http4s("dsl")
-      lazy val server: ModuleID = http4s("ember-server")
-      lazy val client: ModuleID = http4s("ember-client")
-      lazy val circe: ModuleID = http4s("circe")
-      lazy val `blaze-server`: ModuleID = http4s("blaze-server")
-      override def all: Seq[ModuleID] = Seq(dsl, server, client, circe)
-    }
-
     object Refined extends LibGroup {
       private def refined(artifact: String): ModuleID =
         "eu.timepit" %% artifact % Versions.refined
@@ -120,15 +82,6 @@ object Dependencies {
       override def all: Seq[ModuleID] = Seq(core)
     }
 
-    object Redis extends LibGroup {
-      private def redis4cats(artifact: String): ModuleID =
-        "dev.profunktor" %% artifact % Versions.redis4cats
-
-      lazy val catsEffects: ModuleID = redis4cats("redis4cats-effects")
-      lazy val log4cats: ModuleID = redis4cats("redis4cats-log4cats")
-      override def all: Seq[ModuleID] = Seq(catsEffects, log4cats)
-    }
-
     object Cats extends LibGroup {
       lazy val retry = "com.github.cb372" %% "cats-retry"  % Versions.`cats-retry`
       lazy val core = "org.typelevel"     %% "cats-core"   % Versions.cats
@@ -142,25 +95,6 @@ object Dependencies {
       override def all: Seq[ModuleID] = Seq(log4cats, logback)
     }
 
-    object Sttp extends LibGroup {
-      private def sttp(artifact: String): ModuleID =
-        "com.softwaremill.sttp.client3" %% artifact % Versions.sttp
-
-      lazy val circe: ModuleID = sttp("circe")
-      lazy val `fs2-backend`: ModuleID = sttp("async-http-client-backend-fs2")
-      override def all: Seq[ModuleID] = Seq(circe, `fs2-backend`)
-    }
-    object ImageConverter extends LibGroup {
-      private def media(artifact: String): ModuleID = "javax.media" % artifact % Versions.media
-
-      lazy val `javax-media`: ModuleID = media("jai_core")
-      override def all: Seq[ModuleID] = Seq(`javax-media`)
-    }
-    object ScalaPhash extends LibGroup {
-      lazy val `scala-pHash`: ModuleID = "com.github.poslegm" %% "scala-phash" % Versions.scalaPhash
-      override def all: Seq[ModuleID] = Seq(`scala-pHash`)
-    }
-
     object GRPC extends LibGroup {
       private def muRpc(artifact: String): ModuleID =
         "io.higherkindness" %% artifact % Versions.`mu-rpc`
@@ -169,10 +103,6 @@ object Dependencies {
       lazy val server: ModuleID = muRpc("mu-rpc-server")
       lazy val fs2: ModuleID = muRpc("mu-rpc-fs2")
       override def all: Seq[ModuleID] = Seq(service, server, fs2)
-    }
-
-    object Flyway {
-      val `flyway-core` = "org.flywaydb" % "flyway-core" % Versions.flyway
     }
 
     object Enumeratum extends LibGroup {
@@ -226,18 +156,8 @@ object Dependencies {
         `test-container`,
       )
     }
-    lazy val newtype = "io.estatico"       %% "newtype"       % Versions.newtype
-    lazy val `monocle-core` = "dev.optics" %% "monocle-core"  % Versions.monocle
-    lazy val izumi = "dev.zio"             %% "izumi-reflect" % Versions.izumi
-    lazy val `meow-mtl` = "com.olegpy"     %% "meow-mtl-core" % Versions.`meow-mtl`
-    lazy val `cats-tagless-macros` =
-      "org.typelevel" %% "cats-tagless-macros" % Versions.`cats-tagless`
-    lazy val `organize-imports` =
-      "com.github.liancheng"     %% "organize-imports" % Versions.`organize-imports`
-    val chimney = "io.scalaland" %% "chimney"          % Versions.chimney
-
-    lazy val `mongo-db` = "org.mongodb.scala" %% "mongo-scala-driver" % Versions.`mongo-db`
-    lazy val `apache-common-codec` =
-      "commons-codec" % "commons-codec" % Versions.`apache-common-codec`
+    lazy val newtype = "io.estatico"       %% "newtype"      % Versions.newtype
+    lazy val `monocle-core` = "dev.optics" %% "monocle-core" % Versions.monocle
+    val chimney = "io.scalaland"           %% "chimney"      % Versions.chimney
   }
 }
