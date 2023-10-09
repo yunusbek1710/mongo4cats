@@ -1,13 +1,14 @@
 package mongodb.support.jobs
 
+import java.time.ZonedDateTime
+
 import cats.Parallel
 import cats.effect.Sync
 import cats.syntax.all._
 import cron4s._
+import mongodb.support.jobs.JobsRunnerConfig.CronJobConfig
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
-
-import java.time.ZonedDateTime
 
 class JobsRunner[F[_]: Sync: Parallel, Env](
     env: Env,

@@ -1,10 +1,11 @@
 package mongodb.support.jobs
 
+import scala.concurrent.duration.FiniteDuration
+
 import cats.Monad
 import cats.syntax.all._
+import mongo.effects.Calendar
 import org.typelevel.log4cats.Logger
-
-import scala.concurrent.duration.FiniteDuration
 
 /** Entity responsible for monitoring job execution -
   * storing job's state information such as last execution time

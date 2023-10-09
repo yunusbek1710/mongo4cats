@@ -1,15 +1,15 @@
 import Dependencies.Libraries
-import ProjectDefaults.autoImport.CompileAndTest
-
-ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "2.13.12"
 
+name := "mongo4cats"
+
 lazy val root = (project in file("."))
-  .settings(
-    name := "mongo4cats"
+  .aggregate(
+    supports,
+    services,
+    `test-tools`,
   )
-  .dependsOn(LocalProject("common"), LocalProject("test-tools") % CompileAndTest)
 
 lazy val common = project
   .in(file("common"))
@@ -59,5 +59,3 @@ addCommandAlias(
 
 Global / lintUnusedKeysOnLoad := false
 Global / onChangedBuildSource := ReloadOnSourceChanges
-//
-//libraryDependencies ++= Libraries.MongoDB.all ++ Libraries.Cats.all ++ Libraries.Refined.all

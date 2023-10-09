@@ -1,12 +1,13 @@
 package mongodb.support.jobs
 
+import java.time.ZonedDateTime
+
 import cats.Monad
 import cats.syntax.all._
 import cron4s.CronExpr
 import cron4s.lib.javatime._
+import mongo.effects.Calendar
 import org.typelevel.log4cats.Logger
-
-import java.time.ZonedDateTime
 
 trait SupervisedCronJob[F[_], Env] {
   def job: CronJob[F, Env]
