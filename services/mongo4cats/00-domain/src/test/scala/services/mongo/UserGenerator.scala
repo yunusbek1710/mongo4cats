@@ -8,6 +8,9 @@ trait UserGenerator extends Generators {
   def userGen: Gen[User] =
     for {
       id <- intGen
-      name <- nonEmptyStringGen(5, 6)
-    } yield User(id, name)
+      firstname <- nonEmptyStringGen(5, 6)
+      lastname <- nonEmptyStringGen(5, 6)
+      age <- intGen
+      phone <- nonEmptyStringGen(5, 6).opt
+    } yield User(id, firstname, lastname, age, phone)
 }
